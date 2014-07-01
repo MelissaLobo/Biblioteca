@@ -51,5 +51,21 @@ public class Biblioteca {
 		}
 		return livro;
 	}
+
+	public Livro devolverLivro(Long id) {
+		Livro livro  = banco.buscarLivroPorId(id);
+
+		if (livro.getStatus() != Status.ALUGADO) {
+			throw new RuntimeException("Este livro já foi devolvido");
+		}else{
+
+			livro.getDataEmprestimo();
+			livro.getDataDevolucao();
+			livro.setStatus(Status.DISPONIVEL);
+
+			banco.atualizaDevolucaoDoLivro(livro);
+		}
+		return null;
+	}
 }
 

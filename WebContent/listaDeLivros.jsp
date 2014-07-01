@@ -11,21 +11,28 @@
 <body>
 
 	<c:if test="${not empty livros}">
-	<h1><a href="http://localhost:8080/biblioteca/listaDeLivros">Lista de Livros </a><br/></h1>
-
-
+	<h2><a href="http://localhost:8080/biblioteca/listaDeLivros">Lista de Livros </a><br/></h2>
+<table border=1 cellspacing=0 cellpadding=2 bordercolor="000">
+<tr><td>
 	<ul>
 			<c:forEach var="livro" items="${livros}">
-			<li>${livro.id }: ${livro.nome}: ${livro.autor}
-			: ${livro.editora }: ${livro.genero }: ${livro.status }
-			: ${livro.dataEmprestimo }: ${livro.dataDevolucao }
-			<a href="http://localhost:8080/biblioteca/alugar?idLivroParaAlugar=${livro.id}">alugar</a><br/>
+			<br/>
+			<li>${livro.nome}, Autor ${livro.autor}
+			, Editora ${livro.editora }, Genero: ${livro.genero }, Status: ${livro.status }
+			, Emprestado em: ${livro.dataEmprestimo }, Data de devolução: ${livro.dataDevolucao }
+			<br/>
+			<a href="http://localhost:8080/biblioteca/alugar?idLivroParaAlugar=${livro.id}">Alugar</a>
+			
+			<a href="http://localhost:8080/biblioteca/devolver?idLivroParaDevolver=${livro.id}">Devolver</a><br/>
+			
 			</li> 
 			
 		</c:forEach>
 	</ul>
+</td></tr>
+</table>
 </c:if>
-	
+<br/>	
 <a href="http://localhost:8080/biblioteca/menu.jsp">Inicio</a><br/>
 </body>
 </html>

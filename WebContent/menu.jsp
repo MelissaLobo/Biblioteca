@@ -8,6 +8,8 @@
 <title>Biblioteca </title>
 </head>
 <body>
+<h3>Biblioteca Online Lobo Marinho</h3>
+
 <c:if test="${not empty usuarioLogado}">
 	Logado como ${usuarioLogado.email}<br/>
 </c:if>
@@ -15,7 +17,6 @@
 <br/>
 <a href="http://localhost:8080/biblioteca/listaDeLivros">Lista de Livros</a><br/>
 <a href="http://localhost:8080/biblioteca/buscarLivro.jsp">Buscar Livro</a><br/>
-<a href="http://localhost:8080/biblioteca/alugar.jsp">Alugar Livro</a><br/>
 <a href="http://localhost:8080/biblioteca/addLivro.jsp">Adicionar Livro</a><br/>
 <br/>
 

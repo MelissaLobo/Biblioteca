@@ -13,8 +13,7 @@
 		Autor: <input type="text" name="autor"> 
 		Editora: <input type="text" name="editora"> 
 		Genero: <input type="text" name="genero">
-		Status: <input type="text" name="status">  
-		
+				
 		<input type="submit" value="Salvar">
 	</form>
 	

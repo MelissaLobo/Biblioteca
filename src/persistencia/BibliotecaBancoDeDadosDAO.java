@@ -174,4 +174,23 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 			e.printStackTrace();
 		}
 	}	
+	public void atualizaDevolucaoDoLivro(Livro livro) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+
+		try {
+			connection = getConection();
+			String sql = "UPDATE biblioteca SET status=?,emprestimo=?,devolucao=? where id=?";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, Status.DISPONIVEL.toString());
+			statement.setDate(2, null);
+			statement.setDate(3, null);
+			statement.setLong(4,livro.getId());
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}	
 }
