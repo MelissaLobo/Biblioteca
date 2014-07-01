@@ -12,5 +12,4 @@ public interface BibliotecaDAO {
  	Livro devolveldoLivro(Livro livro);
 	Livro buscarLivroPorId(Long id);
 	void atualizaDadosDoLivro(Livro livro);
-	void atualizaDevolucaoDoLivro(Livro livro);
 }
