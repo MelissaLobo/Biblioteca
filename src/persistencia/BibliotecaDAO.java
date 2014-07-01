@@ -9,7 +9,7 @@ public interface BibliotecaDAO {
 	List<Livro> listaDeLivros();
     Livro buscarLivro(String nome);
  	Livro adicionaLivro(Livro livro);
- 	
- 	Livro alugandoLivro(Livro livro, long id);
  	Livro devolveldoLivro(Livro livro);
+	Livro buscarLivroPorId(Long id);
+	void atualizaDadosDoLivro(Livro livro);
 }

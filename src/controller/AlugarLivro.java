@@ -20,18 +20,21 @@ public class AlugarLivro extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		long id = (Long) null;
+		long id =Long.parseLong(req.getParameter("idLivroParaAlugar"));
 		
 		try {
 			
 			Biblioteca biblioteca = new Biblioteca();
-			Livro livro = biblioteca.alugar(id);
-			req.setAttribute(" ",biblioteca.alugar(id));
-
+			Livro livroAlugado = biblioteca.alugar(id);
+			
+			req.setAttribute("nomeDoLivroAlugado", livroAlugado.getNome());
+			vaiParaPagina(req, resp, "sucesso.jsp");
+			
 		} catch (Exception e) {
-			throw new RuntimeException("Livro indisponivel para alugar no momento", e);
+			req.setAttribute("erro", e.getMessage());
+			vaiParaPagina(req, resp, "erro.jsp");
 		}
 		
-		vaiParaPagina(req, resp, ".jsp");
+	
 	}
 }

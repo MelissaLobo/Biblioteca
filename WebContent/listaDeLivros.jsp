@@ -18,7 +18,7 @@
 			<c:forEach var="livro" items="${livros}">
 			<li>${livro.id }: ${livro.nome}: ${livro.autor}
 			: ${livro.editora }: ${livro.genero }: ${livro.status }
-			: ${livro.emprestimo }: ${livro.devolucao }
+			: ${livro.dataEmprestimo }: ${livro.dataDevolucao }
 			<a href="http://localhost:8080/biblioteca/alugar?idLivroParaAlugar=${livro.id}">alugar</a><br/>
 			</li> 
 			

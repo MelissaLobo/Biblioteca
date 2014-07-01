@@ -6,10 +6,11 @@ import static util.Ferramentas.releaseDatabaseResources;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Livro;
 import model.Status;
 
@@ -35,8 +36,8 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 				book.setEditora(resultSet.getString("editora"));
 				book.setGenero(resultSet.getString("genero"));
 				book.setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()));
-				book.setEmprestimo(resultSet.getTimestamp("emprestimo"));
-				book.setDevolucao(resultSet.getTimestamp("devolucao"));
+				book.setDataEmprestimo(resultSet.getTimestamp("emprestimo"));
+				book.setDataDevolucao(resultSet.getTimestamp("devolucao"));
 				livros.add(book);
 			}
 			resultSet.close();
@@ -69,8 +70,42 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 				book.setEditora(resultSet.getString("editora"));
 				book.setGenero(resultSet.getString("genero"));
 				book.setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()));
-				book.setEmprestimo(resultSet.getTimestamp("emprestimo"));
-				book.setDevolucao(resultSet.getTimestamp("devolucao"));
+				book.setDataEmprestimo(resultSet.getTimestamp("emprestimo"));
+				book.setDataDevolucao(resultSet.getTimestamp("devolucao"));
+
+			}
+			resultSet.close();
+		} catch (Exception e) {
+			throw new RuntimeException("Livro não encontrado", e);
+		} finally {
+			releaseDatabaseResources(statement, connection);
+		}return book;
+
+	}
+
+	@Override
+	public Livro buscarLivroPorId(Long id) {
+		Livro book = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+
+		try {
+			connection = getConection();
+			String sql = "SELECT * FROM biblioteca WHERE id = ?";
+			statement = connection.prepareStatement(sql);
+			statement.setLong(1, id);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				book = new Livro();
+				book.setId(resultSet.getLong("id"));
+				book.setNome(resultSet.getString("nome"));
+				book.setAutor(resultSet.getString("autor"));
+				book.setEditora(resultSet.getString("editora"));
+				book.setGenero(resultSet.getString("genero"));
+				book.setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()));
+				book.setDataEmprestimo(resultSet.getTimestamp("emprestimo"));
+				book.setDataDevolucao(resultSet.getTimestamp("devolucao"));
 
 			}
 			resultSet.close();
@@ -99,7 +134,7 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 			statement.setString(4, livro.getGenero());
 			statement.setString(5, Status.DISPONIVEL.toString());
 			statement.executeUpdate();
-			
+
 			ResultSet keys = statement.getGeneratedKeys();
 			keys.next();
 			long key = keys.getLong(1);
@@ -114,31 +149,29 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 	}
 
 	@Override
-	public Livro alugandoLivro(Livro livro, long id) {
-		Livro book = null;
+	public Livro devolveldoLivro(Livro livro) {
+
+		return null;
+	}
+
+	@Override
+	public void atualizaDadosDoLivro(Livro livro) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 
 		try {
 			connection = getConection();
-			String sql = "SELECT * FROM biblioteca WHERE ID = ?";
+			String sql = "UPDATE biblioteca SET status=?,emprestimo=?,devolucao=? where id=?";
 			statement = connection.prepareStatement(sql);
-			statement.setLong(1, id);
-			ResultSet resultSet = statement.executeQuery();
-//			statement.setString(1, livro.getStatus());
-//			statement.executeUpdate();
-			
-			resultSet.close();
-		} catch (Exception e) {
-			throw new RuntimeException("Livro indisponivel para alugar no momento", e);
-		} finally {
-			releaseDatabaseResources(statement, connection);
-		}return book;
-	}
+			statement.setString(1, Status.ALUGADO.toString());
+			statement.setDate(2, new Date(livro.getDataEmprestimo().getTime()));
+			statement.setDate(3, new Date(livro.getDataDevolucao().getTime()));
+			statement.setLong(4,livro.getId());
+			statement.executeUpdate();
 
-	@Override
-	public Livro devolveldoLivro(Livro livro) {
+		} catch (SQLException e) {
 
-		return null;
+			e.printStackTrace();
+		}
 	}	
 }

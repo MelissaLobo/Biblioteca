@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Livro {
 
@@ -9,8 +9,8 @@ public class Livro {
 	private String autor;
 	private String editora;
 	private String genero;
-	private Timestamp emprestimo;
-	private Timestamp devolucao;
+	private Date dataEmprestimo;
+	private Date dataDevolucao;
 	private Status status;
 		
 	
@@ -44,17 +44,17 @@ public class Livro {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-	public Timestamp getEmprestimo() {
-		return emprestimo;
+	public Date getDataEmprestimo() {
+		return dataEmprestimo;
 	}
-	public void setEmprestimo(Timestamp emprestimo) {
-		this.emprestimo = emprestimo;
+	public void setDataEmprestimo(Date dataEmprestimo) {
+		this.dataEmprestimo = dataEmprestimo;
 	}
-	public Timestamp getDevolucao() {
-		return devolucao;
+	public Date getDataDevolucao() {
+		return dataDevolucao;
 	}
-	public void setDevolucao(Timestamp devolucao) {
-		this.devolucao = devolucao;
+	public void setDataDevolucao(Date dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
 	}
 	public boolean equals(Object obj) {
 		Livro outroLivro=(Livro)obj;
