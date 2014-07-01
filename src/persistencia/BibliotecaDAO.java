@@ -1,0 +1,15 @@
+package persistencia;
+
+import java.util.List;
+
+import model.Livro;
+
+public interface BibliotecaDAO {
+
+	List<Livro> listaDeLivros();
+    Livro buscarLivro(String nome);
+ 	Livro adicionaLivro(Livro livro);
+ 	
+ 	Livro alugandoLivro(Livro livro, long id);
+ 	Livro devolveldoLivro(Livro livro);
+}

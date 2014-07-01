@@ -1,0 +1,24 @@
+Ao baixar o programa, ligar e conectar com o Banco de Dados, e criar as seguintes tabelas:
+
+CREATE TABLE Biblioteca
+(
+id INT NOT NULL IDENTITY,
+nome VARCHAR (30)NOT NULL,
+autor VARCHAR (30)NOT NULL,
+editora VARCHAR (30)NOT NULL,
+genero VARCHAR (30)NOT NULL,
+status VARCHAR (30)NOT NULL,
+emprestimo TIMESTAMP,
+devoluçao TIMESTAMP
+
+);
+
+
+
+CREATE TABLE Usuario
+(
+id INT NOT NULL IDENTITY,
+nome VARCHAR (30)NOT NULL,
+email VARCHAR (30)NOT NULL,
+senha VARCHAR (30)NOT NULL
+);
