@@ -59,13 +59,14 @@ public class Biblioteca {
 			throw new RuntimeException("Este livro já foi devolvido");
 		}else{
 
-			livro.getDataEmprestimo();
-			livro.getDataDevolucao();
+			livro.setDataDevolucao(null);
+			livro.setDataDevolucao(null);
 			livro.setStatus(Status.DISPONIVEL);
 
-			banco.atualizaDevolucaoDoLivro(livro);
+			banco.atualizaDadosDoLivro(livro);
 		}
-		return null;
+		return livro;
 	}
 }
+
 

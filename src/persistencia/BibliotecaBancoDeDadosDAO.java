@@ -163,9 +163,22 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 			connection = getConection();
 			String sql = "UPDATE biblioteca SET status=?,emprestimo=?,devolucao=? where id=?";
 			statement = connection.prepareStatement(sql);
-			statement.setString(1, Status.ALUGADO.toString());
-			statement.setDate(2, new Date(livro.getDataEmprestimo().getTime()));
-			statement.setDate(3, new Date(livro.getDataDevolucao().getTime()));
+			statement.setString(1,livro.getStatus().toString());
+			
+			if(livro.getDataEmprestimo()!=null){
+				statement.setDate(2, new Date(livro.getDataEmprestimo().getTime()));
+			}else{
+				statement.setDate(2, null);
+			}
+		
+
+			if(livro.getDataDevolucao()!=null){
+				statement.setDate(3, new Date(livro.getDataDevolucao().getTime()));
+			}else{
+				statement.setDate(3, null);
+			}
+		
+			
 			statement.setLong(4,livro.getId());
 			statement.executeUpdate();
 
@@ -174,23 +187,6 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 			e.printStackTrace();
 		}
 	}	
-	public void atualizaDevolucaoDoLivro(Livro livro) {
-		Connection connection = null;
-		PreparedStatement statement = null;
 
-		try {
-			connection = getConection();
-			String sql = "UPDATE biblioteca SET status=?,emprestimo=?,devolucao=? where id=?";
-			statement = connection.prepareStatement(sql);
-			statement.setString(1, Status.DISPONIVEL.toString());
-			statement.setDate(2, null);
-			statement.setDate(3, null);
-			statement.setLong(4,livro.getId());
-			statement.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-	}	
 }
+
