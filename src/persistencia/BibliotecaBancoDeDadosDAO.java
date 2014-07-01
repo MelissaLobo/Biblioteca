@@ -34,12 +34,9 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 				book.setAutor(resultSet.getString("autor"));
 				book.setEditora(resultSet.getString("editora"));
 				book.setGenero(resultSet.getString("genero"));
-				book.setStatus(
-						Status.valueOf(
-								resultSet.getString("status")
-								));
+				book.setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()));
 				book.setEmprestimo(resultSet.getTimestamp("emprestimo"));
-				book.setDevolucao(resultSet.getTimestamp("devoluçao"));
+				book.setDevolucao(resultSet.getTimestamp("devolucao"));
 				livros.add(book);
 			}
 			resultSet.close();
@@ -71,9 +68,9 @@ public class BibliotecaBancoDeDadosDAO implements BibliotecaDAO{
 				book.setAutor(resultSet.getString("autor"));
 				book.setEditora(resultSet.getString("editora"));
 				book.setGenero(resultSet.getString("genero"));
-				book.setStatus(Status.valueOf(resultSet.getString("status")));
+				book.setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()));
 				book.setEmprestimo(resultSet.getTimestamp("emprestimo"));
-				book.setDevolucao(resultSet.getTimestamp("devoluçao"));
+				book.setDevolucao(resultSet.getTimestamp("devolucao"));
 
 			}
 			resultSet.close();

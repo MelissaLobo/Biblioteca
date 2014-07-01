@@ -48,9 +48,9 @@ public class Biblioteca {
 		}else{
 			Calendar emprestimo = Calendar.getInstance();
 		    livro.setEmprestimo((Timestamp) emprestimo.getTime());
-		    Calendar devoluçao = Calendar.getInstance();
-		    devoluçao.add(Calendar.DAY_OF_MONTH, 20);
-		    livro.setDevolucao((Timestamp) devoluçao.getTime());
+		    Calendar devolucao = Calendar.getInstance();
+		    devolucao.add(Calendar.DAY_OF_MONTH, 20);
+		    livro.setDevolucao((Timestamp) devolucao.getTime());
 			    
 		    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			String date = sdf.format(emprestimo.getTime()); 

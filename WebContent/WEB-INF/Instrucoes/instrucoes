@@ -9,7 +9,7 @@ editora VARCHAR (30)NOT NULL,
 genero VARCHAR (30)NOT NULL,
 status VARCHAR (30)NOT NULL,
 emprestimo TIMESTAMP,
-devoluçao TIMESTAMP
+devolucao TIMESTAMP
 
 );
 
