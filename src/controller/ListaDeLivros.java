@@ -1,8 +1,9 @@
 package controller;
 
+import static util.Ferramentas.vaiParaPagina;
+
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,13 +15,12 @@ import model.Biblioteca;
 @SuppressWarnings("serial")
 @WebServlet("/listaDeLivros")
 public class ListaDeLivros  extends HttpServlet{
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Biblioteca biblioteca = new Biblioteca();
 
- 		request.setAttribute("livros",biblioteca.listaDeLivros() );
+ 		req.setAttribute("livros",biblioteca.listaDeLivros() );
 
-		RequestDispatcher rd = request.getRequestDispatcher("listaDeLivros.jsp");
-		rd.forward(request, response);
+ 		vaiParaPagina(req, resp, "listaDeLivros.jsp");
 	}
 }
